@@ -12,6 +12,6 @@ public class Main {
 
 		new TalkThread(requestQueue1, requestQueue2).start();
 		new TalkThread(requestQueue2, requestQueue1).start();
-		requestQueue1.addRequest(new Request("hello"));
+		// requestQueue1.addRequest(new Request("hello"));
 	}
 }

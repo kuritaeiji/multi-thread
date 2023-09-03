@@ -8,9 +8,14 @@ public class RequestQueue {
 	private final List<Request> requestQueue = new ArrayList<>();
 
 	public synchronized Request getRequest() {
+		Long start = System.currentTimeMillis();
 		while (requestQueue.isEmpty()) {
+			Long rest = 10000 - (System.currentTimeMillis() - start);
+			if (rest < 0) {
+				throw new LivenessException(Thread.currentThread().getName() + rest + "ms");
+			}
 			try {
-				wait();
+				wait(rest);
 			} catch (InterruptedException e) {
 			}
 		}
